@@ -7,6 +7,11 @@ class Person {
     String name = "person"
 
     def getMe() {getClass()}
+
+    def call(Closure c) {
+        c.delegate=this
+        c()
+    }
 }
 class Thing {
     String name = "thing"
@@ -25,3 +30,7 @@ cl.resolveStrategy = Closure.DELEGATE_FIRST
 cl()
 cl.delegate = new Thing()
 cl()
+
+
+cl3 = { println "hello " } >> {println "world"}
+cl3()
